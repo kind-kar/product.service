@@ -46,7 +46,6 @@ class ApplicationTests {
 	@Test
 	void shouldCreateProduct() throws Exception {
 
-
 		ProductRequest productRequest = getProductRequest();
 		String productRequestString = objectMapper.writeValueAsString(productRequest);
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/product")

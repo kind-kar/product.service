@@ -76,4 +76,5 @@ class ApplicationTests {
 				.andExpect(status().isOk());
 		Assertions.assertTrue(productRepository.findAll().size() == 1);
 	}
+
 }

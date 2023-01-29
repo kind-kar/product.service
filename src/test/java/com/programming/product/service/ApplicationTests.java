@@ -46,7 +46,6 @@ class ApplicationTests {
 	@Test
 	void shouldCreateProduct() throws Exception {
 
-
 		ProductRequest productRequest = getProductRequest();
 		String productRequestString = objectMapper.writeValueAsString(productRequest);
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/product")
@@ -62,6 +61,20 @@ class ApplicationTests {
 				.description("pirog")
 				.price(BigDecimal.valueOf(300))
 				.build();
+	}
+
+	@Test
+	void shouldGetProduct() throws Exception {
+
+		ProductRequest productRequest = getProductRequest();
+		String productRequestString = objectMapper.writeValueAsString(productRequest);
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/product")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(productRequestString))
+				.andExpect(status().isCreated());
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/product"))
+				.andExpect(status().isOk());
+		Assertions.assertTrue(productRepository.findAll().size() == 1);
 	}
 
 }
